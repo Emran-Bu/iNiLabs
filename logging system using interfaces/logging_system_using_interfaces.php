@@ -1,3 +1,5 @@
+
+<!-- logging system using interfaces -->
 <?php
 date_default_timezone_set('asia/dhaka');
 // Logger Interface

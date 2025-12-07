@@ -1,3 +1,4 @@
+<!-- Valid Parentheses -->
 <?php
 
 function parenthesesValidationCheck($b) {
