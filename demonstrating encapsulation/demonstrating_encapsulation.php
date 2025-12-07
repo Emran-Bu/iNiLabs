@@ -9,7 +9,7 @@ class Employee
     public function __construct($name, $salary)
     {
         $this->name = $name;
-        $this->setSalary($salary); // ensures validation
+        $this->setSalary($salary);
     }
 
     // getter salary
