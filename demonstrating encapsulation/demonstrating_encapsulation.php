@@ -46,3 +46,4 @@ echo "Updated Salary: " . $employee->getSalary() . "<br>";
 
 // Attempting negative salary
 // $employee->setSalary(-80000);
+?>
