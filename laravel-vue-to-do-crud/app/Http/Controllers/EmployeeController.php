@@ -42,7 +42,7 @@ class EmployeeController extends Controller
                         'salary' => 'required|numeric',
                     ]);
 
-        if($validator->fails()) return response()->json([$validator->errors()->all()], 422);
+        // if($validator->fails()) return response()->json([$validator->errors()->all()], 422);
 
         $validated = $validator->validate();
         $employee = Employee::create($validated);

@@ -22,7 +22,7 @@
                             </thead>
                             <tbody>
 
-                                <tr v-for="(employee, index ) in employees" key = "employee.id">
+                                <tr v-for="(employee, index ) in employees" :key = "employee.id">
 
                                 <th scope="row">{{ ++index }}</th>
                                 <td>{{ employee.employee_name }}</td>
@@ -54,12 +54,17 @@
             }
         },
         mounted(){
-            axios.get('/api/employee').then((success)=>{
-                // console.log(success.data.employee);
-                this.employees = success.data.employee;
-            }).catch((errors)=>{
-                console.log('errors');
-            })
+            this.employeeList();
+        },
+        methods: {
+            employeeList(){
+                axios.get('/api/employee').then((success)=>{
+                    // console.log(success.data.employee);
+                    this.employees = success.data.employee;
+                }).catch((errors)=>{
+                    console.log(errors);
+                })
+            }
         }
     }
 </script>

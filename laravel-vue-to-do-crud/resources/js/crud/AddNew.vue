@@ -7,19 +7,21 @@
                     <router-link :to="{name: 'List' }" class="btn btn-success float-end">List</router-link>
                     </div>
                         <div class="card-body">
-                            <form>
+                            <form @submit.prevent="storeData">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                    <label class="form-label">Employee Name</label>
+                                    <input type="text" class="form-control" v-model="FormData.employee_name">
+                                    <span class="text-danger" v-for="(error, index ) in formError.employee_name" :key = "index">{{ error }}</span>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                    <label class="form-label">Employee Designation</label>
+                                    <input type="text" class="form-control" v-model="FormData.employee_designation">
+                                    <span class="text-danger" v-for="(error, index ) in formError.employee_designation" :key = "index">{{ error }}</span>
                                 </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <div class="mb-3">
+                                    <label class="form-label">Employee Salary</label>
+                                    <input type="number" class="form-control" v-model="FormData.salary">
+                                    <span class="text-danger" v-for="(error, index ) in formError.salary" :key = "index">{{ error }}</span>
                                 </div>
                                 <button type="submit" class="btn btn-primary ">Submit</button>
                             </form>
@@ -32,7 +34,36 @@
 
 <script>
     export default {
+        data(){
+            return {
+                FormData: {
+                    employee_name: '',
+                    employee_designation: '',
+                    salary: '',
+                },
 
+                formError: {
+                    employee_name: '',
+                    employee_designation: '',
+                    salary: '',
+                }
+            }
+        },
+
+        methods:{
+            storeData(){
+                console.log(this.FormData);
+                axios.post('/api/employee/store', this.FormData).then((success)=>{
+                    // console.log(success.data.employee);
+                    this.$router.push({name: 'List'});
+                }).catch((error)=>{
+                    // console.log(error.response.data.errors.employee_designation);
+                    this.formError.employee_name = error.response.data.errors.employee_name;
+                    this.formError.employee_designation = error.response.data.errors.employee_designation;
+                    this.formError.salary = error.response.data.errors.salary;
+                })
+            }
+        }
     }
 </script>
 
