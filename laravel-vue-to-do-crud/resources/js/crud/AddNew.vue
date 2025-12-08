@@ -4,7 +4,7 @@
             <div class="col-md-12 mt-5">
                 <div class="card">
                     <div class="card-header float-right">
-                    <router-link :to="{name: 'List' }" class="btn btn-primary float-end">List</router-link>
+                    <router-link :to="{name: 'List' }" class="btn btn-success float-end">List</router-link>
                     </div>
                         <div class="card-body">
                             <form>
@@ -21,7 +21,7 @@
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary ">Submit</button>
                             </form>
                         </div>
                     </div>

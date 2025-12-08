@@ -6,21 +6,22 @@
             <div class="col-md-12 mt-5">
                 <div class="card">
                     <div class="card-header float-right">
-                    <router-link :to="{name: 'AddNew' }" class="btn btn-primary float-end">Add New</router-link>
+                    <router-link :to="{name: 'AddNew' }" class="btn btn-success float-end">Add New</router-link>
                     </div>
                         <div class="card-body">
+
                         <table class="table">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Employee_Name</th>
+                                <th scope="col">Employee_Designation</th>
+                                <th scope="col">Salary</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{ products }}</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
@@ -49,7 +50,18 @@
 
 <script>
     export default {
-
+        data(){
+            return {
+                products: [],
+            }
+        },
+        mounted(){
+            axios.get('/api/employee').then((success)=>{
+                console.log(success.data.employee);
+            }).catch((errors)=>{
+                console.log('errors');
+            })
+        }
     }
 </script>
 
