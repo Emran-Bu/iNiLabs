@@ -13,4 +13,5 @@ Route::controller(EmployeeController::class)->prefix('/employee')->group(functio
     Route::post('/store', 'store');
     Route::post('/update/{id}', 'update');
     Route::delete('/delete/{id}', 'destroy');
+    Route::get('/show/{id}', 'show');
 });

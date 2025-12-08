@@ -1,11 +1,11 @@
 <template>
-    <!-- <h2 class="text-danger">List component</h2> -->
-    <!-- <router-view /> -->
      <div class="container">
         <div class="row">
             <div class="col-md-12 mt-5">
+                <h3 class="my-3 text-center">Simple To-do CRUD Operation Using Laravel + VueJs</h3>
                 <div class="card">
                     <div class="card-header float-right">
+                    <span class="text-bold fs-4">Employee List</span>
                     <router-link :to="{name: 'AddNew' }" class="btn btn-success float-end">Add New</router-link>
                     </div>
                         <div class="card-body">
@@ -21,7 +21,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <tr v-for="(employee, index ) in employees" :key = "employee.id">
 
                                 <th scope="row">{{ ++index }}</th>
@@ -29,16 +28,12 @@
                                 <td>{{ employee.employee_designation }}</td>
                                 <td>{{ employee.salary }}</td>
                                 <td>
-                                    <a class="btn btn-success me-2 btn-sm" href="http://">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="http://">Delete</a>
+                                    <router-link :to="{name: 'Edit', params:{id: employee.id} }" class="btn btn-success me-2 btn-sm">Edit</router-link>
+                                    <a @click.prevent="destroy(employee.id)" class="btn btn-danger btn-sm" href="http://">Delete</a>
                                 </td>
-
                                 </tr>
-
-
                             </tbody>
                             </table>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
             </div>
@@ -64,8 +59,17 @@
                 }).catch((errors)=>{
                     console.log(errors);
                 })
+            },
+            destroy(employee_id){
+                axios.delete('/api/employee/delete/'+employee_id).then((success)=>{
+                    // console.log(success);
+                    this.employeeList();
+                }).catch((errors)=>{
+                    console.log(errors);
+                })
             }
-        }
+        },
+
     }
 </script>
 

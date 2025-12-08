@@ -4,11 +4,11 @@
             <div class="col-md-9 mt-5">
                 <div class="card">
                     <div class="card-header float-right">
-                        <span class="text-bold fs-4">Add Employee</span>
+                        <span class="text-bold fs-4">Update Employee</span>
                     <router-link :to="{name: 'List' }" class="btn btn-success float-end">List</router-link>
                     </div>
                         <div class="card-body">
-                            <form @submit.prevent="storeData">
+                            <form @submit.prevent="updateData(FormData.id)">
                                 <div class="mb-3">
                                     <label class="form-label">Employee Name</label>
                                     <input type="text" class="form-control" v-model="FormData.employee_name">
@@ -51,11 +51,23 @@
             }
         },
 
+        mounted(){
+            this.singleEmployee();
+        },
+
         methods:{
-            storeData(){
-                console.log(this.FormData);
-                axios.post('/api/employee/store', this.FormData).then((success)=>{
+            singleEmployee(){
+                axios.get('/api/employee/show/'+this.$route.params.id).then((success)=>{
                     // console.log(success.data.employee);
+                    this.FormData = success.data.employee;
+                }).catch((errors)=>{
+                    console.log(errors);
+                })
+            },
+            updateData($employee_id){
+                // console.log(this.FormData);
+                axios.post('/api/employee/update/'+$employee_id, this.FormData).then((success)=>{
+                    console.log(success);
                     this.$router.push({name: 'List'});
                 }).catch((error)=>{
                     // console.log(error.response.data.errors.employee_designation);

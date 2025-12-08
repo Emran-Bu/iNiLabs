@@ -53,9 +53,12 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
         //
+        // dd("hello($id)");
+        $employee = Employee::FindOrFail($id);
+        return response()->json(['message' => 'show single employee', 'employee' => $employee], 200);
     }
 
     /**
@@ -80,7 +83,7 @@ class EmployeeController extends Controller
                         'salary' => 'required|numeric',
                     ]);
 
-        if($validator->fails()) return response()->json([$validator->errors()->all()], 422);
+        // if($validator->fails()) return response()->json([$validator->errors()->all()], 422);
 
         $validated = $validator->validate();
         $employee->update($validated);
