@@ -3,11 +3,13 @@
 
 class Employee
 {
+    private $emp_id;
     private $name;
     private $salary;
 
-    public function __construct($name, $salary)
+    public function __construct($emp_id, $name, $salary)
     {
+        $this->emp_id = $emp_id;
         $this->name = $name;
         $this->setSalary($salary);
     }
@@ -28,22 +30,29 @@ class Employee
         $this->salary = $salary;
     }
 
-    public function getName()
+    public function getEmpId()
+    {
+        return $this->emp_id;
+    }
+
+    public function getEmpName()
     {
         return $this->name;
     }
 }
 
-$employee = new Employee("Emran Hasan", 60000);
+$employee = new Employee("202221063028", "Emran Hasan", 60000);
 
 // Getting salary
-echo "Employee: " . $employee->getName() . "<br>";
+echo "Employee ID: " . $employee->getEmpId() . "<br>";
+echo "Employee Name: " . $employee->getEmpName() . "<br>";
 echo "Salary: " . $employee->getSalary() . "<br>";
 
-// Updating salary through secure setter
+// Updating salary securely
 $employee->setSalary(70000);
 echo "Updated Salary: " . $employee->getSalary() . "<br>";
 
 // Attempting negative salary
-// $employee->setSalary(-80000);
+$employee->setSalary(-80000);
+
 ?>
