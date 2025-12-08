@@ -13,31 +13,29 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Employee_Name</th>
                                 <th scope="col">Employee_Designation</th>
                                 <th scope="col">Salary</th>
+                                <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                <th scope="row">{{ products }}</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+
+                                <tr v-for="(employee, index ) in employees" key = "employee.id">
+
+                                <th scope="row">{{ ++index }}</th>
+                                <td>{{ employee.employee_name }}</td>
+                                <td>{{ employee.employee_designation }}</td>
+                                <td>{{ employee.salary }}</td>
+                                <td>
+                                    <a class="btn btn-success me-2 btn-sm" href="http://">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="http://">Delete</a>
+                                </td>
+
                                 </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>@social</td>
-                                </tr>
+
+
                             </tbody>
                             </table>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -52,12 +50,13 @@
     export default {
         data(){
             return {
-                products: [],
+                employees: [],
             }
         },
         mounted(){
             axios.get('/api/employee').then((success)=>{
-                console.log(success.data.employee);
+                // console.log(success.data.employee);
+                this.employees = success.data.employee;
             }).catch((errors)=>{
                 console.log('errors');
             })
