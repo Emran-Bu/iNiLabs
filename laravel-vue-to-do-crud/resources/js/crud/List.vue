@@ -2,7 +2,7 @@
      <div class="container">
         <div class="row">
             <div class="col-md-12 mt-5">
-                <h3 class="my-3 text-center">Simple To-do CRUD Operation Using Laravel + VueJs</h3>
+                <h3 class="my-3 text-center">Simple To-do Employee CRUD Operation Using Laravel + VueJs</h3>
                 <div class="card">
                     <div class="card-header float-right">
                     <span class="text-bold fs-4">Employee List</span>
@@ -29,7 +29,7 @@
                                 <td>{{ employee.salary }}</td>
                                 <td>
                                     <router-link :to="{name: 'Edit', params:{id: employee.id} }" class="btn btn-success me-2 btn-sm">Edit</router-link>
-                                    <a @click.prevent="destroy(employee.id)" class="btn btn-danger btn-sm" href="http://">Delete</a>
+                                    <a @click.prevent="destroy(employee.id)" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                                 </tr>
                             </tbody>
